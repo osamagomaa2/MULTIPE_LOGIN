@@ -1,0 +1,81 @@
+ <table class="tbl-full">
+                    <tr>
+                         <th>S.N</th>
+                         <th>Full Name</th>
+                         <th>Usernam</th>
+                         <th>Actions</th>
+                         
+                    </tr>
+
+
+                    <!-- 1. select daat
+                         2. check if there is data 
+                         3. if count > 0 
+                         4. while $rows=mysqli_fetch_assoc($res)
+                         5.  $id = $rows['id'];
+                         6. <td><?php //echo $full_name;  ?></td>
+                     -->
+
+                    <?php 
+
+                    $sql = "SELECT * FROM tbl_admin";
+                    $res = mysqli_query($conn,$sql);
+
+                    // Check Wheter the quey is executed or not 
+
+                    if($res==TRUE){
+                         //count rows if there is data or not
+
+                         $count = mysqli_num_rows($res);
+
+                    $sn = 1; // Create a balue and assign it 
+
+                         if($count>0){
+                              // we have data
+                              while($rows=mysqli_fetch_assoc($res))
+                              {
+                              // using while loop to get all the data 
+
+                              $id = $rows['id'];
+                              $full_name = $rows['full_name'];
+                              $User_name = $rows['username'];
+
+                              //Display Value on our table
+                              ?>
+
+                         <tr>
+                         <td><?php echo $sn++; ?></td>
+                         <td><?php echo $full_name;  ?></td>
+                         <td><?php  echo $User_name ?> </td>
+                         <td>
+
+                              <a href="update_password.php?id=<?php echo $id; ?>" class="btn-primary">Change Password</a>
+                               <a href="update_admin.php?id=<?php echo $id; ?>" class="btn-secondary">Update Admin</a>
+                               <a href="delete_admin.php?id=<?php echo $id; ?>" class="btn-danger">Delete Admin</a>
+                              
+                         </td>
+                              </tr>
+
+                              <?php 
+
+        
+
+
+
+                              }
+                         }
+
+                         else{
+                              //  we do not have data
+                         }
+                    }
+                    
+                    
+                    ?>
+
+
+
+               </table>
+
+        </div>
+     </div>
